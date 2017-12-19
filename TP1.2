@@ -1,1 +1,34 @@
-1.2
+<?php
+	$id = mysqli_connect( "localhost","root","root", "jbt");
+	if (mysqli_connect_errno()) {
+		printf("Echec de la connexion : %s\n", mysqli_connect_error());
+		exit();
+	}
+	echo "Succès de connexion au serveur de Base de Données. <br />";
+	echo "Succès de la sélection de la base de données. <br />";
+
+	$result = mysqli_query ($id, "SELECT * FROM pilotes") ;
+	if (!$result) {
+		printf("Message d'erreur : %s", mysqli_error($id));
+		echo "<br />";
+	}else{
+		printf("SUCCESS : la réponse contient %d lignes <br/>", mysqli_num_rows($result));
+	}
+	$sql = "INSERT INTO pilotes (Nom, Prenom, engin, Generation)
+ 		VALUES ('LAPUREE', 'Jérémie', '883 SportsTrack', 2)";
+	echo $sql."<br/>";
+	$result = mysqli_query ($id, $sql) ;
+	if (!$result) {
+		printf("Message d'erreur : %s", mysqli_error($id));
+		exit();
+	}else{
+		printf("SUCCESS :  <br/>");
+	}
+	$rep = mysqli_close($id);
+	if($rep == true){
+		echo "Déconnexion de la Base de données et du serveur réussies";
+	}else{
+		echo "Déconnexion de la Base de données et du serveur ratées";
+	}
+?>
+
