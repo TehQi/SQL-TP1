@@ -1,0 +1,37 @@
+-- phpMyAdmin SQL Dump
+-- version 2.9.2
+-- http://www.phpmyadmin.net
+-- 
+-- Serveur: localhost
+-- Genere le : Mardi 27 Mars 2007 ˆ 14:04
+-- Version du serveur: 5.0.27
+-- Version de PHP: 4.4.4
+-- 
+-- Base de donnŽes: `jbt`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `pilotes`
+-- 
+
+CREATE TABLE `pilotes` (
+  `indice` int(11) NOT NULL auto_increment,
+  `nom` mediumtext NOT NULL,
+  `prenom` mediumtext NOT NULL,
+  `engin` mediumtext NOT NULL,
+  `generation` tinyint(4) NOT NULL,
+  PRIMARY KEY  (`indice`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- 
+-- Contenu de la table `pilotes`
+-- 
+
+INSERT INTO `pilotes` (`indice`, `nom`, `prenom`, `engin`, `generation`) VALUES 
+(1, 'MANCHZECK', 'Jean', '850 Commando', 1),
+(2, 'BRACAME', 'Edouard', 'CB 750', 1),
+(3, 'DUCABLE', 'Jean Raoul', '750 H2', 1),
+(4, 'BRASLETTI', 'Guido', '900 Desmo SS', 1);
+
