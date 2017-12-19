@@ -1,0 +1,69 @@
+<?php
+	$id = mysqli_connect( "localhost","root","root", "jbt");
+	if (mysqli_connect_errno()) {
+		printf("Echec de la connexion : %s\n", mysqli_connect_error());
+		exit();
+	}
+	echo "Succès de connexion au serveur de Base de Données. <br />";
+	echo "Succès de la sélection de la base de données. <br />";
+	$result = mysqli_query ($id, "SELECT * FROM pilotes") ;
+	if (!$result) {
+		printf("Message d'erreur : %s", mysqli_error($id));
+		echo "<br />";
+	}else{
+		printf("SUCCESS : la réponse contient %d lignes\n", mysqli_num_rows($result));
+	}
+	echo "<h2>Avec mysqli_fetch_row</h2>";
+	echo "<table border='1'>" ;
+	while ($enreg = mysqli_fetch_row ($result)){
+		echo "<tr>" ;
+		foreach ($enreg as $c => $v) {
+			echo "<td>".$c."</td><td>".$v."</td>";
+		}
+	echo "</tr>";
+	}
+	echo "</table><hr/>" ;
+	$result = mysqli_query ($id, "SELECT * FROM pilotes") ;
+	echo "<h2>Avec mysqli_fetch_assoc</h2>";
+	echo "<table border='1'>" ;
+		while ($enreg = mysqli_fetch_assoc ($result)){
+			echo "<tr>" ;
+			foreach ($enreg as $c => $v) {
+				echo "<td>".$c."</td><td>".$v."</td>";
+			}
+	echo "</tr>";
+		}
+	echo "</table><hr/>" ;
+	$result = mysqli_query ($id, "SELECT * FROM pilotes") ;
+	echo "<h2>Avec mysqli_fetch_array</h2>";
+	echo "<table border='1'>" ;
+	while ($enreg = mysqli_fetch_array ($result)){
+		echo "<tr>" ;
+			foreach ($enreg as $c => $v) {
+				echo "<td>".$c."</td><td>".$v."</td>";
+			}
+	echo "</tr>";
+		}
+	echo "</table><hr/>" ;
+	$result = mysqli_query ($id, "SELECT * FROM pilotes") ;
+	echo "<h2>Boucle for : mysqli_fetch_row </h2>";
+	if($result == true){
+	echo "<table border='1'>" ;
+		$numCol=mysqli_num_fields($result);
+		while ($enreg = mysqli_fetch_row ($result)){
+			echo "<tr>" ;
+			for ($i=0; $i < $numCol; $i++){
+				echo "<td>".$enreg[$i]."</td>";
+			}
+			echo "</tr>";
+		}
+		echo "</table><hr/>" ;
+	}
+	$rep = mysqli_close($id);
+	if($rep == true){
+		echo "Déconnexion de la Base de données et du serveur réussies";
+	}else{
+		echo "Déconnexion de la Base de données et du serveur ratées";
+	}
+
+?>
